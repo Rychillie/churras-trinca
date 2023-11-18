@@ -1,5 +1,8 @@
+"use client";
+
 import { ToastContainer } from "@/components/shared/toast";
 import { TooltipProvider } from "@/components/shared/tooltip";
+import { AnimatePresence } from "framer-motion";
 import { ReactNode } from "react";
 
 type ProviderProps = {
@@ -9,8 +12,10 @@ type ProviderProps = {
 export default function Provider({ children }: ProviderProps) {
   return (
     <>
-      <TooltipProvider>{children}</TooltipProvider>
-      <ToastContainer />
+      <AnimatePresence initial={false}>
+        <TooltipProvider>{children}</TooltipProvider>
+        <ToastContainer />
+      </AnimatePresence>
     </>
   );
 }

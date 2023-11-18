@@ -7,7 +7,9 @@ import {
   X,
   XCircle,
 } from "@/components/shared/icons";
-import { useToastStore } from "@/stores/toast";
+import { useToastStore } from "@/lib/stores/toast";
+import clsx from "clsx";
+import { motion } from "framer-motion";
 import map from "lodash/map";
 import { tv } from "tailwind-variants";
 
@@ -20,7 +22,7 @@ type ToastAction = {
 export type ToastType = {
   toastId: string;
   title: string;
-  message: string;
+  message?: string;
   variant?: "info" | "success" | "error" | "warning";
   actions?: ToastAction[];
 };
@@ -59,7 +61,7 @@ const actionButtonClassName = tv({
     type: {
       confirm: "",
       cancel:
-        "bg-gray-600 hover:bg-gray-700 focus:ring-gray-300 dark:bg-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-800",
+        "bg-neutral-600 hover:bg-neutral-700 focus:ring-neutral-300 dark:bg-neutral-500 dark:hover:bg-neutral-600 dark:focus:ring-neutral-800",
     },
     variant: {
       info: "",
@@ -110,21 +112,33 @@ export const Toast = ({
   const Icon = IconVariant[variant];
 
   return (
-    <div
+    <motion.div
       id={toastId}
-      className="fixed bottom-5 right-5 w-full max-w-xs rounded-xl bg-white p-4 text-gray-500 shadow dark:bg-gray-800 dark:text-gray-400"
       role="alert"
+      initial={{ opacity: 0, bottom: -24 }}
+      animate={{ opacity: 1, bottom: 0 }}
+      exit={{ opacity: 0, bottom: -24 }}
+      transition={{
+        opacity: { duration: 0.2 },
+        bottom: { type: "spring", bounce: 0.5, duration: 1 },
+      }}
+      className="overflow-hidden rounded-xl bg-white p-4 text-neutral-500 shadow transition-all dark:bg-neutral-800 dark:text-neutral-400 sm:shadow-lg md:shadow-xl"
     >
       <div className="flex">
         <div className={iconClassName({ variant })}>
           <Icon className="h-4 w-4" />
           <span className="sr-only">Close</span>
         </div>
-        <div className="ml-3 text-sm font-normal">
-          <span className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
+        <div
+          className={clsx(
+            "ml-3 text-sm font-normal",
+            !message && "flex items-center justify-center",
+          )}
+        >
+          <span className="mb-1 text-sm font-semibold text-neutral-900 dark:text-white">
             {title}
           </span>
-          <div className="mb-2 text-sm font-normal">{message}</div>
+          {message && <div className="text-sm font-normal">{message}</div>}
           {actions && actions.length > 0 && (
             <div className="grid grid-cols-2 gap-2">
               {actions &&
@@ -141,34 +155,36 @@ export const Toast = ({
                     </button>
                   </div>
                 ))}
-              {/* <For each={actions}>
-                {(action) => (
-                  <div key={action.title}>
-                    <button onClick={action.onClick} className={actionButtonClassName({ type: action.type, variant })}>
-                      {action.title}
-                    </button>
-                  </div>
-                )}
-              </For> */}
             </div>
           )}
         </div>
         <button
           type="button"
           onClick={() => handleCloseToast(toastId)}
-          className="-mx-1.5 -my-1.5 ml-auto inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-white p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300 dark:bg-gray-800 dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-white"
+          className="-mx-1.5 -my-1.5 ml-auto inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-white p-1.5 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-900 focus:ring-2 focus:ring-neutral-300 dark:bg-neutral-800 dark:text-neutral-500 dark:hover:bg-neutral-700 dark:hover:text-white"
           aria-label="Fechar"
         >
           <span className="sr-only">Fechar</span>
           <X className="h-3 w-3" />
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 export const ToastContainer = () => {
   const items = useToastStore((state) => state.items);
 
-  return map(items, (item) => <Toast key={item.toastId} isOpen {...item} />);
+  return (
+    <motion.div
+      initial={{ height: 0 }}
+      animate={{ height: "auto" }}
+      exit={{ height: 0 }}
+      className="fixed bottom-5 left-5 right-5 flex w-[calc(100%-40px)] flex-col-reverse gap-2 transition-all sm:left-auto sm:w-full sm:max-w-xs"
+    >
+      {map(items, (item) => (
+        <Toast key={item.toastId} isOpen {...item} />
+      ))}
+    </motion.div>
+  );
 };
