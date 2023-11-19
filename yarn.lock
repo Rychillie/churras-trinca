@@ -438,9 +438,9 @@
   integrity sha512-y9euML0cim1JrykNxADLfaG0FgD1g/yTHwUs/Jg9ZIU7WKj2/4IW9Lbb1WZbvck78W/lfGXFfe+u2EGfIJXdLQ==
 
 "@types/node@^20":
-  version "20.9.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.9.1.tgz#9d578c610ce1e984adda087f685ace940954fe19"
-  integrity sha512-HhmzZh5LSJNS5O8jQKpJ/3ZcrrlG6L70hpGqMIAoM9YVD0YBRNWYsfwcXq8VnSjlNpCpgLzMXdiPo+dxcvSmiA==
+  version "20.9.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.9.2.tgz#002815c8e87fe0c9369121c78b52e800fadc0ac6"
+  integrity sha512-WHZXKFCEyIUJzAwh3NyyTHYSR35SevJ6mZ1nWwJafKtiQbqRTIKSRcw3Ma3acqgsent3RRDqeVwpHntMk+9irg==
   dependencies:
     undici-types "~5.26.4"
 
@@ -1958,6 +1958,11 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
+next-themes@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/next-themes/-/next-themes-0.2.1.tgz#0c9f128e847979daf6c67f70b38e6b6567856e45"
+  integrity sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==
+
 next@14.0.3:
   version "14.0.3"
   resolved "https://registry.yarnpkg.com/next/-/next-14.0.3.tgz#8d801a08eaefe5974203d71092fccc463103a03f"
@@ -2452,6 +2457,11 @@ slash@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
+
+sonner@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/sonner/-/sonner-1.2.0.tgz#26e7520d0f93b9f70763130099b4e1b16f121f11"
+  integrity sha512-4bIPKrhF+Z4yEC4EZvNBswcVzMrUhztOQXqyIoiZqiqN1TT39FeK+TgRsQidvvztnYgOn4+S3LdAsri61c7ATA==
 
 source-map-js@^1.0.2:
   version "1.0.2"

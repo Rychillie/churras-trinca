@@ -1,4 +1,5 @@
 import Provider from "@/components/provider";
+import { cn } from "@/lib/utils";
 import "@/styles/tailwind.css";
 import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
@@ -16,8 +17,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="pt-BR">
-      <body className={raleway.className}>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body
+        className={cn(raleway.className, "bg-neutral-50 dark:bg-neutral-950")}
+      >
         <Provider>{children}</Provider>
       </body>
     </html>
