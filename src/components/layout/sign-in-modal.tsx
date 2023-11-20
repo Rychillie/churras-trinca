@@ -24,7 +24,7 @@ const SignInModal = ({
 
   return (
     <Modal showModal={showSignInModal} setShowModal={setShowSignInModal}>
-      <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-neutral-200 dark:md:border-neutral-800">
+      <div className="w-full overflow-hidden shadow-xl dark:shadow-none md:max-w-md md:rounded-2xl md:border md:border-neutral-200 dark:md:border-neutral-800">
         <div className="flex flex-col items-center justify-center space-y-3 border-b border-neutral-200 bg-white px-4 py-6 pt-8 text-center dark:border-neutral-800 dark:bg-black md:px-16">
           <Link
             href="/"

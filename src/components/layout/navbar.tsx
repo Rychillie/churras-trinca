@@ -41,7 +41,7 @@ export default function NavBar({ session }: { session: Session | null }) {
             {session ? (
               <div className="flex items-center justify-center gap-2">
                 <button
-                  className="rounded-full border border-black bg-black px-4 py-2 text-xs font-medium text-white transition-all hover:bg-white hover:text-black"
+                  className="rounded-full border border-black bg-black px-4 py-2 text-xs font-medium text-white transition-all hover:bg-white hover:text-black dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white"
                   onClick={() => {
                     setShowCreateEventModal(true);
                   }}
@@ -52,7 +52,7 @@ export default function NavBar({ session }: { session: Session | null }) {
               </div>
             ) : (
               <button
-                className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
+                className="rounded-full border border-black bg-black px-4 py-2 text-xs font-medium text-white transition-all hover:bg-white hover:text-black dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white"
                 onClick={() => setShowSignInModal(true)}
               >
                 Sign In

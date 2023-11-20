@@ -31,7 +31,7 @@ export default function Popover({
             <div className="sticky top-0 z-20 flex w-full items-center justify-center rounded-t-[10px] bg-inherit">
               <div className="my-3 h-1 w-12 rounded-full bg-neutral-300 dark:bg-neutral-700" />
             </div>
-            <div className="flex min-h-[150px] w-full items-center justify-center overflow-hidden bg-white pb-8 align-middle shadow-xl dark:bg-black">
+            <div className="flex min-h-[150px] w-full items-center justify-center overflow-hidden bg-white pb-8 align-middle shadow-xl dark:bg-black dark:shadow-none">
               {content}
             </div>
           </Drawer.Content>
