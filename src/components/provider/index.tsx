@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/shared/tooltip";
 import useMediaQuery from "@/lib/hooks/use-media-query";
 import { AnimatePresence } from "framer-motion";
 import { ThemeProvider } from "next-themes";
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Toaster } from "sonner";
 
 type ProviderProps = {

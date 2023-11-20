@@ -1,9 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export const Skeleton = ({
-  className,
-  ...rest
-}: React.ComponentProps<"div">) => (
+const Skeleton = ({ className, ...rest }: React.ComponentProps<"div">) => (
   <div
     role="status"
     className={cn(
@@ -13,3 +10,5 @@ export const Skeleton = ({
     {...rest}
   />
 );
+
+export default Skeleton;
