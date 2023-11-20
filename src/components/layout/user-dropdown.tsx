@@ -14,7 +14,7 @@ export default function UserDropdown({ session }: { session: Session }) {
   if (!email) return null;
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-flex items-center justify-center text-left">
       <Popover
         content={
           <div className="w-full rounded-md bg-white p-2 dark:bg-black sm:w-56">

@@ -1,4 +1,4 @@
-import Nav from "@/components/layout/nav";
+import { Nav } from "@/components/layout";
 import Provider from "@/components/provider";
 import { cn } from "@/lib/utils";
 import "@/styles/tailwind.css";
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: Props) {
       <body
         className={cn(
           raleway.className,
-          "h-full w-full bg-neutral-50 dark:bg-neutral-950",
+          "h-screen w-screen bg-neutral-50 dark:bg-neutral-950",
         )}
       >
         <Suspense fallback="">

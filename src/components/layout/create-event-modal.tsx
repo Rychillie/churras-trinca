@@ -1,8 +1,7 @@
 "use client";
 
-import { Google, LoadingDots } from "@/components/shared/icons";
+import { LoadingDots } from "@/components/shared/icons";
 import Modal from "@/components/shared/modal";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
 import {
   Dispatch,
@@ -13,17 +12,20 @@ import {
 } from "react";
 import { toast } from "sonner";
 
-const SignInModal = ({
-  showSignInModal,
-  setShowSignInModal,
+const CreateEventModal = ({
+  showCreateEventModal,
+  setShowCreateEventModal,
 }: {
-  showSignInModal: boolean;
-  setShowSignInModal: Dispatch<SetStateAction<boolean>>;
+  showCreateEventModal: boolean;
+  setShowCreateEventModal: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const [signInClicked, setSignInClicked] = useState(false);
+  const [createEventClicked, setCreateEventClicked] = useState(false);
 
   return (
-    <Modal showModal={showSignInModal} setShowModal={setShowSignInModal}>
+    <Modal
+      showModal={showCreateEventModal}
+      setShowModal={setShowCreateEventModal}
+    >
       <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-neutral-200 dark:md:border-neutral-800">
         <div className="flex flex-col items-center justify-center space-y-3 border-b border-neutral-200 bg-white px-4 py-6 pt-8 text-center dark:border-neutral-800 dark:bg-black md:px-16">
           <Link
@@ -40,23 +42,21 @@ const SignInModal = ({
 
         <div className="flex flex-col space-y-4 bg-neutral-50 px-4 py-8 dark:bg-neutral-950 md:px-16">
           <button
-            disabled={signInClicked}
+            disabled={createEventClicked}
             className={`${
-              signInClicked
+              createEventClicked
                 ? "cursor-not-allowed border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900"
                 : "border border-neutral-200 bg-white text-black hover:bg-neutral-50 dark:border-neutral-800 dark:bg-black dark:text-white dark:hover:bg-neutral-950"
             } flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none`}
             onClick={() => {
-              setSignInClicked(true);
-              signIn("google");
+              setCreateEventClicked(true);
               toast.loading("Carregando...");
             }}
           >
-            {signInClicked ? (
+            {createEventClicked ? (
               <LoadingDots color="#737373" />
             ) : (
               <>
-                <Google className="h-4 w-4" />
                 <p>Sign In com Google</p>
               </>
             )}
@@ -67,20 +67,23 @@ const SignInModal = ({
   );
 };
 
-export default function useSignInModal() {
-  const [showSignInModal, setShowSignInModal] = useState(false);
+export default function useCreateEventModal() {
+  const [showCreateEventModal, setShowCreateEventModal] = useState(false);
 
-  const SignInModalCallback = useCallback(() => {
+  const CreateEventModalCallback = useCallback(() => {
     return (
-      <SignInModal
-        showSignInModal={showSignInModal}
-        setShowSignInModal={setShowSignInModal}
+      <CreateEventModal
+        showCreateEventModal={showCreateEventModal}
+        setShowCreateEventModal={setShowCreateEventModal}
       />
     );
-  }, [showSignInModal, setShowSignInModal]);
+  }, [showCreateEventModal, setShowCreateEventModal]);
 
   return useMemo(
-    () => ({ setShowSignInModal, SignInModal: SignInModalCallback }),
-    [setShowSignInModal, SignInModalCallback],
+    () => ({
+      setShowCreateEventModal,
+      CreateEventModal: CreateEventModalCallback,
+    }),
+    [setShowCreateEventModal, CreateEventModalCallback],
   );
 }

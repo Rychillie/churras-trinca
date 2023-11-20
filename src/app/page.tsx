@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="mx-auto flex h-full w-full max-w-screen-lg flex-col items-center justify-center gap-2 px-6 py-12 md:gap-4">
+      <main className="mx-auto flex h-screen w-full max-w-prose flex-col items-center justify-center gap-2 px-6 py-12 md:gap-4">
         <h2 className="text-2xl font-bold text-black dark:text-white md:text-4xl">
           Hello world
         </h2>
@@ -28,7 +28,7 @@ export default function Home() {
           size="lg"
           isLoading={!hydratate}
           onClick={() => {
-            toast.success("Modal aberto!");
+            toast.success("Botão clicado!");
           }}
         >
           Button

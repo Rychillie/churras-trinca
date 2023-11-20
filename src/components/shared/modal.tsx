@@ -3,7 +3,6 @@
 import useMediaQuery from "@/lib/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 import * as Dialog from "@radix-ui/react-dialog";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 import { Drawer } from "vaul";
 
