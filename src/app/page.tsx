@@ -23,16 +23,15 @@ export default function Home() {
         <p className="text-neutral-800 dark:text-neutral-200">
           This project is under development!
         </p>
-        <Button
-          variant="outline"
-          size="lg"
-          isLoading={!hydratate}
+
+        <button
+          className="flex h-10 w-full items-center justify-center space-x-3 rounded-md border border-neutral-200 bg-white text-sm text-black shadow-sm transition-all duration-75 hover:bg-neutral-50 focus:outline-none dark:border-neutral-800 dark:bg-black dark:text-white dark:hover:bg-neutral-950 sm:max-w-sm"
           onClick={() => {
             toast.success("Botão clicado!");
           }}
         >
           Button
-        </Button>
+        </button>
       </main>
     </>
   );

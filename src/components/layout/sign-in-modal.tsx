@@ -2,6 +2,7 @@
 
 import { Google, LoadingDots } from "@/components/shared/icons";
 import Modal from "@/components/shared/modal";
+import clsx from "clsx";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import {
@@ -41,11 +42,12 @@ const SignInModal = ({
         <div className="flex flex-col space-y-4 bg-neutral-50 px-4 py-8 dark:bg-neutral-950 md:px-16">
           <button
             disabled={signInClicked}
-            className={`${
+            className={clsx(
+              "flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none",
               signInClicked
                 ? "cursor-not-allowed border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900"
-                : "border border-neutral-200 bg-white text-black hover:bg-neutral-50 dark:border-neutral-800 dark:bg-black dark:text-white dark:hover:bg-neutral-950"
-            } flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none`}
+                : "border-neutral-200 bg-white text-black hover:bg-neutral-50 dark:border-neutral-800 dark:bg-black dark:text-white dark:hover:bg-neutral-950",
+            )}
             onClick={() => {
               setSignInClicked(true);
               signIn("google");
