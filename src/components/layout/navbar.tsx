@@ -11,7 +11,12 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
-export default function NavBar({ session }: { session: Session | null }) {
+type Props = {
+  session: Session | null;
+  hasEvents: boolean;
+};
+
+export default function NavBar({ session, hasEvents }: Props) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const { CreateEventModal, setShowCreateEventModal } = useCreateEventModal();
   const scrolled = useScroll(50);
@@ -24,8 +29,8 @@ export default function NavBar({ session }: { session: Session | null }) {
 
   return (
     <>
-      <SignInModal />
-      <CreateEventModal />
+      {hasEvents && <SignInModal />}
+      {session && <CreateEventModal />}
       <nav
         className={`fixed top-0 flex w-full justify-center ${
           scrolled
@@ -40,24 +45,26 @@ export default function NavBar({ session }: { session: Session | null }) {
           <div>
             {session ? (
               <div className="flex items-center justify-center gap-2">
-                <button
-                  className="rounded-full border border-black bg-black px-4 py-2 text-xs font-medium text-white transition-all hover:bg-white hover:text-black dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white"
-                  onClick={() => {
-                    setShowCreateEventModal(true);
-                  }}
-                >
-                  Criar evento
-                </button>
+                {hasEvents && (
+                  <button
+                    className="rounded-full border border-black bg-black px-4 py-2 text-xs font-medium text-white transition-all hover:bg-white hover:text-black dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white"
+                    onClick={() => {
+                      setShowCreateEventModal(true);
+                    }}
+                  >
+                    Criar evento
+                  </button>
+                )}
                 <UserDropdown session={session} />
               </div>
-            ) : (
+            ) : hasEvents ? (
               <button
                 className="rounded-full border border-black bg-black px-4 py-2 text-xs font-medium text-white transition-all hover:bg-white hover:text-black dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white"
                 onClick={() => setShowSignInModal(true)}
               >
                 Sign In
               </button>
-            )}
+            ) : null}
           </div>
         </div>
       </nav>
