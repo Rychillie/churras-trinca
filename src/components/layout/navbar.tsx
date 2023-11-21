@@ -18,7 +18,9 @@ type Props = {
 
 export default function NavBar({ session, hasEvents }: Props) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
-  const { CreateEventModal, setShowCreateEventModal } = useCreateEventModal();
+  const { CreateEventModal, setShowCreateEventModal } = useCreateEventModal({
+    creatorId: session?.user?.id as string,
+  });
   const scrolled = useScroll(50);
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export default function NavBar({ session, hasEvents }: Props) {
             : "bg-white/0"
         } z-30 transition-all`}
       >
-        <div className="mx-5 flex h-16 w-full max-w-prose items-center justify-between">
+        <div className="flex h-16 w-full max-w-prose items-center justify-between px-6">
           <Link href="/" className="font-display flex items-center text-2xl">
             🥩 Churras
           </Link>

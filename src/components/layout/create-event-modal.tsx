@@ -3,8 +3,11 @@
 import { TextField } from "@/components/elements";
 import { LoadingDots } from "@/components/shared/icons";
 import Modal from "@/components/shared/modal";
+import { createEvent } from "@/lib/actions/events";
+import { Event } from "@prisma/client";
 import clsx from "clsx";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Dispatch,
   SetStateAction,
@@ -17,14 +20,17 @@ import { toast } from "sonner";
 const CreateEventModal = ({
   showCreateEventModal,
   setShowCreateEventModal,
+  creatorId,
 }: {
   showCreateEventModal: boolean;
   setShowCreateEventModal: Dispatch<SetStateAction<boolean>>;
+  creatorId: Event["creatorId"];
 }) => {
   const [createEventClicked, setCreateEventClicked] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [slug, setSlug] = useState("");
+  const router = useRouter();
 
   return (
     <Modal
@@ -88,8 +94,32 @@ const CreateEventModal = ({
                 : "border-neutral-200 bg-white text-black hover:bg-neutral-50 dark:border-neutral-800 dark:bg-black dark:text-white dark:hover:bg-neutral-950",
             )}
             onClick={() => {
+              if (!name || !description || !slug) {
+                toast.error("Preencha todos os campos!");
+                return;
+              }
+
               setCreateEventClicked(true);
-              toast.loading("Carregando...");
+              createEvent({
+                name,
+                description,
+                slug,
+                creatorId,
+              } as Event)
+                .then((res) => {
+                  if (res) {
+                    toast.success("Evento criado com sucesso!");
+                    router.push(`/${slug}`);
+                  } else {
+                    toast.error("Ocorreu um erro ao criar o evento!");
+                  }
+                })
+                .catch(() => {
+                  toast.error("Ocorreu um erro ao criar o evento!");
+                })
+                .finally(() => {
+                  setCreateEventClicked(false);
+                });
             }}
           >
             {createEventClicked ? (
@@ -104,7 +134,11 @@ const CreateEventModal = ({
   );
 };
 
-export default function useCreateEventModal() {
+export default function useCreateEventModal({
+  creatorId,
+}: {
+  creatorId: Event["creatorId"];
+}) {
   const [showCreateEventModal, setShowCreateEventModal] = useState(false);
 
   const CreateEventModalCallback = useCallback(() => {
@@ -112,9 +146,10 @@ export default function useCreateEventModal() {
       <CreateEventModal
         showCreateEventModal={showCreateEventModal}
         setShowCreateEventModal={setShowCreateEventModal}
+        creatorId={creatorId}
       />
     );
-  }, [showCreateEventModal, setShowCreateEventModal]);
+  }, [showCreateEventModal, setShowCreateEventModal, creatorId]);
 
   return useMemo(
     () => ({

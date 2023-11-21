@@ -1,4 +1,5 @@
-import { getEvents, getSession } from "@/lib/actions";
+import { getEvents } from "@/lib/actions/events";
+import { getSession } from "@/lib/actions/session";
 import Navbar from "./navbar";
 
 export default async function Nav() {

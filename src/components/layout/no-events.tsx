@@ -1,17 +1,26 @@
 "use client";
 
 import { useCreateEventModal, useSignInModal } from "@/components/layout";
+import { Event } from "@prisma/client";
 import { Session } from "next-auth";
 
-export default function NoEvents({ session }: { session: Session | null }) {
-  const { CreateEventModal, setShowCreateEventModal } = useCreateEventModal();
+export default function NoEvents({
+  session,
+  creatorId,
+}: {
+  session: Session | null;
+  creatorId?: Event["creatorId"];
+}) {
+  const { CreateEventModal, setShowCreateEventModal } = useCreateEventModal({
+    creatorId: creatorId as string,
+  });
   const { SignInModal, setShowSignInModal } = useSignInModal();
 
   return (
     <>
       <SignInModal />
       <CreateEventModal />
-      <div className="mx-auto flex h-screen w-full max-w-prose flex-col items-center justify-center gap-2 px-6 py-12 text-center md:gap-4">
+      <div className="flex h-screen w-full flex-col items-center justify-center gap-2 px-6 py-12 text-center md:gap-4">
         <h2 className="text-2xl font-bold text-black dark:text-white md:text-4xl">
           {session ? "Ainda não há eventos!" : "Você não está logado!"}
         </h2>
