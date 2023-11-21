@@ -1,4 +1,4 @@
-import { NoEvents, NoLogin } from "@/components/layout";
+import { NoEvents } from "@/components/layout";
 import { getEvents, getSession } from "@/lib/actions";
 
 export default async function Home() {
@@ -6,8 +6,6 @@ export default async function Home() {
   const session = await getSession();
 
   return (
-    <main>
-      {events.length > 0 ? <></> : session ? <NoEvents /> : <NoLogin />}
-    </main>
+    <main>{events.length > 0 ? <></> : <NoEvents session={session} />}</main>
   );
 }
