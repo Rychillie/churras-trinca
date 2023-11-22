@@ -9,8 +9,12 @@ type ListEventsProps = {
 
 export function ListEvents({ session, events, userId }: ListEventsProps) {
   return session
-    ? events.filter(
-        (event) => event.status === "published" || event.creatorId === userId,
-      )
+    ? events.map((event) => {
+        if (event.status === "published") {
+          return event;
+        } else if (event.status === "draft" && event.creatorId === userId) {
+          return event;
+        }
+      })
     : events.filter((event) => event.status === "published");
 }

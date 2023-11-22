@@ -35,6 +35,7 @@ export async function getEvent({ slug }: { slug: Event["slug"] }) {
     },
     include: {
       creator: true,
+      invites: true,
     },
   });
 }
