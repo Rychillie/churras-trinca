@@ -1,6 +1,7 @@
 {
   "plugins": [
-    "prettier-plugin-tailwindcss"
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-prisma"
   ],
   "pluginSearchDirs": false
 }
